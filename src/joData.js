@@ -715,8 +715,8 @@
 		return 'datetime\'' + datetime + '\'';
 	};
 
-	jo.newdatetime = function(datetime) {
-		return datetime;
+	jo.literalvalue = function(value) {
+		return 'literalvalue' + value;
 	};
 
 	jo.decimal = function(decimal) {
@@ -979,6 +979,10 @@
 
 	Helpers = {
 		formatValue: function(value) {
+			if (value.length > 12 && value.substring(0, 12) === 'literalvalue') {
+				return value.replace('literalvalue', '');
+			}
+
 			if (value.length > 8 && value.substring(0, 8) === 'datetime') {
 				return value;
 			}
